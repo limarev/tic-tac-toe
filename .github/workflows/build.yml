@@ -1,0 +1,50 @@
+name: Tick-tack-toe
+run-name: Build Tick-tack-toe
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build info
+        run: |
+          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+          echo "🐧 This job is now running on a ${{ runner.os }} server!"
+          echo "🔎 This job builds Collabora fork ${{ github.ref }} for adnroid."
+          echo "This job is run from $(whoami)"
+          echo "Current directory is $(pwd)"
+          echo "Current directory structure: $(ls -la)"
+
+      - name: Build ${{ github.ref }}
+        run: |
+          cmake --version
+
+      - name: 'Upload Artifact ${{ env.lib }}/lib-debug.aar'
+        if: (!startsWith(github.ref, 'refs/tags/release-'))
+        uses: actions/upload-artifact@v4
+        with:
+          name: lib-debug.aar.zip
+          path: ${{ env.lib }}/lib-debug.aar
+          compression-level: 0 # no compression
+
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/release-')
+        uses: softprops/action-gh-release@v1
+        with:
+          token: "${{ secrets.GITHUB_TOKEN }}"
+          generate_release_notes: true
+          target_commitish: develop
+          prerelease: false
+          files: |
+            ${{ env.app }}/*.apk
+            ${{ env.lib }}/*.aar
+
+      - run: echo "🍏 This job's status is ${{ job.status }}."
