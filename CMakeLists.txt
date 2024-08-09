@@ -1,15 +1,15 @@
 cmake_minimum_required(VERSION 3.22)
 
-project(template
+project(tick-tack-toe
         VERSION 1.0.0
-        DESCRIPTION "How template works"
+        DESCRIPTION "tick-tack-toe"
         LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED 23)
 set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 
-add_executable(template)
+add_executable(tick)
 
-target_sources(template
+target_sources(tick
         PRIVATE
         main.cpp)
