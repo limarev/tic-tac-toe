@@ -1,3 +1,6 @@
+#include "argparse.hpp"
+#include "version.h"
+
 #include <algorithm>
 #include <array>
 #include <filesystem>
@@ -201,27 +204,31 @@ private:
 
 int main(int argc, char *argv[]) {
 
-  std::filesystem::path field_path;
-  if (argc != 2) {
-    field_path = "../files/field.txt";
-    std::cout << "Ты передал какое-то говно или ничего, а надо было только один аргумент, путь к файлу.\n";
-    if (std::filesystem::exists(field_path)) {
-      std::cout << "Но я нашел " + field_path.string() + ". Поэтому я буду использовать его\n";
-    } else {
-      std::cout << "Поэтому я ничего не буду делать.\n";
-      return 1;
-    }
-  } else {
-    field_path = argv[argc - 1];
+  argparse::ArgumentParser program("tick", PROJECT_VERSION);
+  program.add_argument("file_path").help("Файл, в котором будем играть").nargs(1).default_value("../files/field1.txt");
+  program.add_argument("--verbose").default_value(false).implicit_value(true);
+
+  try {
+    program.parse_args(argc, argv);
+  } catch (const std::exception &ex) {
+    std::cerr << ex.what() << '\n';
+    std::cerr << program;
+    return 1;
   }
 
+  std::filesystem::path file_path = program.get<std::string>("file_path");
+
+  if (not exists(file_path)) {
+    std::cerr << file_path << " не существует.\n";
+    return 1;
+  }
 
   Role role;
   Matrix matrix{};
 
-  read(field_path, matrix, role);
+  read(file_path, matrix, role);
 
-  FileWriter writer(field_path, std::move(matrix), role);
+  FileWriter writer(file_path, std::move(matrix), role);
 
   auto state = check_state(writer.get());
   if (state != State::CONTINUE) {
@@ -231,6 +238,8 @@ int main(int argc, char *argv[]) {
 
   next(writer.get(), role);
 
-  std::cout << writer.get();
+  if (program["--verbose"] == true) {
+    std::cout << writer.get();
+  }
 
 }

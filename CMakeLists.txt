@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.22)
 
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/Modules)
+include(Version)
+
 project(tick-tack-toe
-        VERSION 0.0.2
         DESCRIPTION "tick-tack-toe"
         LANGUAGES CXX)
 
@@ -14,6 +16,15 @@ add_executable(tick)
 target_sources(tick
                PRIVATE
                main.cpp)
+
+target_include_directories(tick PRIVATE ${CMAKE_BINARY_DIR}/include)
+
+file(CONFIGURE OUTPUT include/version.h CONTENT "\
+#pragma once
+
+#define PROJECT_VERSION \"${THIS_PROJECT_VERSION}\"
+#define PROJECT_SHA \"${THIS_PROJECT_SHA}\"
+")
 
 include(CPack)
 include(GNUInstallDirs)
