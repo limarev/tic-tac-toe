@@ -24,6 +24,7 @@ jobs:
           echo "🔎 This job builds Tick-tack-toe game."
           echo "This job is run from $(whoami)"
           echo "Current directory is $(pwd)"
+          echo $THIS_PROJECT_VERSION
 
       - name: Build ${{ github.ref }}
         run: |
