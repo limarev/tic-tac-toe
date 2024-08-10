@@ -11,11 +11,17 @@ macro(_git)
             )
 endmacro()
 
-_git(describe --tags --abbrev=0)
-set(git_tag "${_git_out}")
+if (DEFINED ENV{THIS_PROJECT_VERSION} AND DEFINED ENV{THIS_PROJECT_SHA})
+    set(git_tag "${THIS_PROJECT_VERSION}")
+    set(git_hash "${THIS_PROJECT_SHA}")
+else ()
+    _git(describe --tags --abbrev=0)
+    set(git_tag "${_git_out}")
 
-_git(rev-parse --short HEAD)
-set(git_hash "${_git_out}")
+    _git(rev-parse --short HEAD)
+    set(git_hash "${_git_out}")
+
+endif ()
 
 if (NOT git_tag)
     message(FATAL_ERROR "Failed to get git tag. Cannot setup project version.")

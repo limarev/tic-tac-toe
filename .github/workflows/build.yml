@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: [ ubuntu-latest ]
+    env:
+      THIS_PROJECT_VERSION: ${{ github.ref }}
+      THIS_PROJECT_SHA: ${{ github.sha }}
     permissions:
       contents: write
     steps:
