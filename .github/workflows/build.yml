@@ -1,5 +1,5 @@
-name: Tick-tack-toe
-run-name: Build Tick-tack-toe
+name: Tic-tac-toe
+run-name: Build Tic-tac-toe
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
         run: |
           echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
           echo "🐧 This job is now running on a ${{ runner.os }} server!"
-          echo "🔎 This job builds Tick-tack-toe game."
+          echo "🔎 This job builds Tic-tac-toe game."
           echo "This job is run from $(whoami)"
           echo "Current directory is $(pwd)"
 

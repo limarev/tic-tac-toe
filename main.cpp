@@ -204,7 +204,7 @@ private:
 
 int main(int argc, char *argv[]) {
 
-  argparse::ArgumentParser program("tick", PROJECT_VERSION);
+  argparse::ArgumentParser program("tic", PROJECT_VERSION);
   program.add_argument("file_path").help("Файл, в котором будем играть").nargs(1).default_value("../files/field1.txt");
   program.add_argument("--verbose").default_value(false).implicit_value(true);
 
