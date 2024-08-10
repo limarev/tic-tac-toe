@@ -26,6 +26,8 @@ file(CONFIGURE OUTPUT include/version.h CONTENT "\
 #define PROJECT_SHA \"${THIS_PROJECT_SHA}\"
 ")
 
+set(CPACK_PACKAGE_VERSION ${THIS_PROJECT_VERSION})
+
 include(CPack)
 include(GNUInstallDirs)
 install(TARGETS tick
