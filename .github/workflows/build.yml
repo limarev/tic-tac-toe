@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: [ ubuntu-latest, macos-latest ]
+    runs-on: [ ubuntu-latest ]
     env:
       THIS_PROJECT_VERSION: ${{ github.ref_name }}
       THIS_PROJECT_SHA: ${{ github.sha }}
