@@ -202,12 +202,17 @@ int main(int argc, char *argv[]) {
   std::filesystem::path field_path;
   if (argc != 2) {
     field_path = "../files/field.txt";
-    std::cout << "Ты передал какое-то говно или ничего, а надо было только один аргумент, путь к файлу. Поэтому я буду "
-                 "использовать " +
-                     field_path.string() + '\n';
+    std::cout << "Ты передал какое-то говно или ничего, а надо было только один аргумент, путь к файлу.\n";
+    if (std::filesystem::exists(field_path)) {
+      std::cout << "Но я нашел " + field_path.string() + ". Поэтому я буду использовать его\n";
+    } else {
+      std::cout << "Поэтому я ничего не буду делать.\n";
+      return 1;
+    }
+  } else {
+    field_path = argv[argc - 1];
   }
 
-  field_path = argv[argc - 1];
 
   Role role;
   Matrix matrix{};
