@@ -9,7 +9,7 @@
   "configurePresets": [
     {
       "name": "ci-release",
-      "inherits": ["default", "ninja", "release"]
+      "inherits": ["default", "release"]
     }
   ],
   "buildPresets": [
