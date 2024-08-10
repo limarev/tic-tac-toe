@@ -6,9 +6,43 @@
     "patch": 0
   },
   "include": ["BasePresets.json"],
-  "configurePresets": [],
-  "buildPresets": [],
+  "configurePresets": [
+    {
+      "name": "ci-release",
+      "inherits": ["default", "ninja", "release"]
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "ci-release",
+      "configurePreset": "ci-release"
+    }
+  ],
   "testPresets": [],
-  "packagePresets": [],
-  "workflowPresets": []
+  "packagePresets": [
+    {
+      "name": "ci-release",
+      "configurePreset": "ci-release",
+      "inherits": ["default", "zip"]
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "ci-release",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "ci-release"
+        },
+        {
+          "type": "build",
+          "name": "ci-release"
+        },
+        {
+          "type": "package",
+          "name": "ci-release"
+        }
+      ]
+    }
+  ]
 }

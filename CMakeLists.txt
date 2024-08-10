@@ -14,3 +14,8 @@ add_executable(tick)
 target_sources(tick
                PRIVATE
                main.cpp)
+
+include(CPack)
+include(GNUInstallDirs)
+install(TARGETS tick
+        RUNTIME)

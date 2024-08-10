@@ -143,6 +143,11 @@
       "name": "bundle",
       "generators": ["BUNDLE"],
       "hidden": true
+    },
+    {
+      "name": "zip",
+      "generators": ["ZIP"],
+      "hidden": true
     }
   ]
 }
