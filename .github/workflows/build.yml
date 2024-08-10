@@ -28,13 +28,13 @@ jobs:
           cmake -S . -B build
           cmake --build build
 
-      - name: 'Upload Artifact build/tick'
-        if: (!startsWith(github.ref, 'refs/tags/v'))
-        uses: actions/upload-artifact@v4
-        with:
-          name: tick.zip
-          path: build/tick
-          compression-level: 0 # no compression
+      #      - name: 'Upload Artifact build/tick'
+      #        if: (!startsWith(github.ref, 'refs/tags/v'))
+      #        uses: actions/upload-artifact@v4
+      #        with:
+      #          name: tick.zip
+      #          path: build/tick
+      #          compression-level: 0 # no compression
 
       - name: Release
         if: startsWith(github.ref, 'refs/tags/v')
