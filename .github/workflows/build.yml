@@ -42,7 +42,7 @@ jobs:
         with:
           token: "${{ secrets.GITHUB_TOKEN }}"
           generate_release_notes: true
-          target_commitish: develop
+          target_commitish: main
           prerelease: false
           files: |
             build/tick

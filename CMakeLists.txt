@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 
 project(tick-tack-toe
-        VERSION 1.0.0
+        VERSION 0.0.1
         DESCRIPTION "tick-tack-toe"
         LANGUAGES CXX)
 
